@@ -9,7 +9,7 @@ Use this if you want to include icons for windows executables also from a mac. W
 ### Installation
 
 ```bash
-npm install --save-dev https://github.com/ThorstenHans/gulp-aweome-electron
+npm install --save-dev https://github.com/ThorstenHans/gulp-awesome-electron
 ```
 
 ### Usage
