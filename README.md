@@ -1,11 +1,15 @@
-# gulp-atom-electron
+# gulp-awesome-electron
+
+**This is a fork from `gulp-atom-electon`**
+
+Use this if you want to include icons for windows executables also from a mac. Warning> Wine is still required!
 
 [![Build Status](https://travis-ci.org/joaomoreno/gulp-atom-electron.svg?branch=master)](https://travis-ci.org/joaomoreno/gulp-atom-electron)
 
 ### Installation
 
 ```bash
-npm install --save-dev gulp-atom-electron
+npm install --save-dev https://github.com/ThorstenHans/gulp-aweome-electron
 ```
 
 ### Usage

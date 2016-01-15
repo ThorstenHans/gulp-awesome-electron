@@ -23,7 +23,7 @@ exports.getAppPath = function(opts) {
 
 function patchExecutable(opts) {
 	return es.map(function (f, cb) {
-		if (f.relative !== getOriginalAppFullName(opts) || process.platform !== 'win32') {
+		if (f.relative !== getOriginalAppFullName(opts)) {
 			return cb(null, f);
 		}
 
