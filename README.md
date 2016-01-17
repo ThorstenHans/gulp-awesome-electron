@@ -1,6 +1,6 @@
 # gulp-awesome-electron
 
-**This is a fork from `gulp-atom-electon`**
+**This is a fork from `gulp-atom-electron`**
 
 Use this if you want to include icons for windows executables also from a mac. Warning> Wine is still required!
 
@@ -26,7 +26,7 @@ the `app` folder, ready for launch.
 ```javascript
 var gulp = require('gulp');
 var symdest = require('gulp-symdest');
-var electron = require('gulp-atom-electron');
+var electron = require('gulp-awesome-electron');
 
 gulp.task('default', function () {
 	return gulp.src('src/**')
@@ -46,7 +46,7 @@ Finally, you can always pipe it to a **zip archive** for easy distribution.
 ```javascript
 var gulp = require('gulp');
 var zip = require('gulp-vinyl-zip');
-var electron = require('gulp-atom-electron');
+var electron = require('gulp-awesome-electron');
 
 gulp.task('default', function () {
 	return gulp.src('src/**')
@@ -62,7 +62,7 @@ makes sure you always have the exact version of Electron in a directory:
 
 ```javascript
 var gulp = require('gulp');
-var electron = require('gulp-atom-electron');
+var electron = require('gulp-awesome-electron');
 
 gulp.task('default', function () {
 	return electron.dest('electron-build', { version: '0.34.1', platform: 'darwin' });
