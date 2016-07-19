@@ -1,14 +1,14 @@
 {
   "name": "gulp-awesome-electron",
   "version": "1.2.0",
-  "description": "gulp plugin for packaging Electron applications",
+  "description": "Fork from João's gulp-atom-electron - allows to integrade icons for win32 when building on the mac",
   "main": "src/index.js",
   "scripts": {
     "test": "mocha"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/joaomoreno/gulp-atom-electron.git"
+    "url": "https://github.com/ThorstenHans/gulp-awesome-electron.git"
   },
   "keywords": [
     "gulpplugin",
@@ -19,11 +19,12 @@
     "github"
   ],
   "author": "João Moreno",
+  "contributors": ["Thorsten Hans"],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/joaomoreno/gulp-atom-electron/issues"
+    "url": "https://github.com/ThorstenHans/gulp-awesome-electron/issues"
   },
-  "homepage": "https://github.com/joaomoreno/gulp-atom-electron",
+  "homepage": "https://github.com/ThorstenHans/gulp-awesome-electron",
   "dependencies": {
     "event-stream": "^3.1.7",
     "github-releases": "^0.2.0",
