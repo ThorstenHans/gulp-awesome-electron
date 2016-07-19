@@ -82,7 +82,7 @@ You **must** provide the following options:
 - `platform` - kind of OS (`darwin`, `linux`, `win32`)
 
 The following options are **optional**:
-
+- `quiet` - suppress a progress bar when downloading
 - `token` - GitHub access token(to avoid request limit. You can grab it [here](https://github.com/settings/tokens))
 
 - `arch` - the processor architecture (`ia32`, `x64`)
@@ -91,7 +91,7 @@ The following options are **optional**:
 	- `winIcon` - path to an `.ico` file
 	- `companyName` - company name
 	- `copyright` - copyright statement
-	
+
 - **Darwin**
 	- `darwinIcon` - path to an `.icns` file
 	- `darwinBundleDocumentTypes` - ([reference](https://developer.apple.com/library/ios/documentation/filemanagement/conceptual/documentinteraction_topicsforios/Articles/RegisteringtheFileTypesYourAppSupports.html)) array of dictionaries, each containing the following structure:
@@ -100,3 +100,6 @@ The following options are **optional**:
 	 - `ostypes` - the `CFBundleTypeOSTypes` value, a `string` array
 	 - `extensions` - the `CFBundleTypeExtensions` value, a `string` array of file extensions
 	 - `iconFile` - the `CFBundleTypeIconFile` value
+
+- **Linux**
+	- `linuxExecutableName` - overwrite the name of the executable in Linux
