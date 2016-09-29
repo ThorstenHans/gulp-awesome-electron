@@ -1,21 +1,28 @@
 # gulp-awesome-electron
 
-**This is a fork from `gulp-atom-electron`**
+By using `gulp-awesome-electron` you can build cross platform desktop apps using GitHub Electron straight from your gulp build process. This module is a fork with some small extensions from `gulp-atom-electron`.
 
-Use this if you want to include icons for windows executables also from a mac.
+##Enhancements compared to `gulp-atom-electron`
 
-**Warning>** Wine is still required!
+ - include icons for Windows executables when build on MacOS or Linux
+ - provide custom `path` to cache electron binaries
 
 ### Installation
 
 ```bash
-npm install --save-dev https://github.com/ThorstenHans/gulp-awesome-electron
+$ npm i gulp-awesome-electron --save-dev
 ```
+
+### Building for Windows from MacOS or Linux
+
+If you want to build for windows either from a MacOS or Linux, you've to install [Wine](https://www.winehq.org/) version `^1.6.0`.
 
 ### Usage
 
-You can use this module in two distinct ways: **to package your application** and/or
-**to download a version of Electron** to disk.
+You can use `gulp-awesome-electron` for tow different tasks:
+
+ - for **packaging** your application
+ - for **downloading** an electron release to your disk
 
 #### How to Package Your Application
 
@@ -24,13 +31,20 @@ You should source your app's files using `gulp.src` and pipe them through
 the `app` folder, ready for launch.
 
 ```javascript
-var gulp = require('gulp');
-var symdest = require('gulp-symdest');
-var electron = require('gulp-awesome-electron');
+const gulp = require('gulp'),
+    symdest = require('gulp-symdest'),
+    electron = require('gulp-awesome-electron');
 
-gulp.task('default', function () {
+gulp.task('default',() => {
 	return gulp.src('src/**')
-		.pipe(electron({ version: '0.34.1', platform: 'darwin' }))
+		.pipe(electron({
+		    version: '1.4.0',
+            platform: 'darwin',
+		    cache: '~/.electron-cache/',
+		    companyName: 'your company name here',
+		    token: process.env.GH_TOKEN,
+		    linuxExecutableName: 'AwesomeElectron'
+        }))
 		.pipe(symdest('app'));
 });
 ```
@@ -44,13 +58,20 @@ Finally, you can always pipe it to a **zip archive** for easy distribution.
 [joaomoreno/gulp-vinyl-zip](https://github.com/joaomoreno/gulp-vinyl-zip) is recommended:
 
 ```javascript
-var gulp = require('gulp');
-var zip = require('gulp-vinyl-zip');
-var electron = require('gulp-awesome-electron');
+const gulp = require('gulp'),
+    zip = require('gulp-vinyl-zip'),
+    electron = require('gulp-awesome-electron');
 
-gulp.task('default', function () {
+gulp.task('default', () => {
 	return gulp.src('src/**')
-		.pipe(electron({ version: '0.34.1', platform: 'darwin' }))
+		.pipe(electron({
+		    version: '1.4.0',
+            platform: 'darwin',
+            cache: '~/.electron-cache/',
+            companyName: 'your company name here',
+            token: process.env.GH_TOKEN,
+            linuxExecutableName: 'AwesomeElectron'
+        }))
 		.pipe(zip.dest('app-darwin.zip'));
 });
 ```
@@ -60,12 +81,37 @@ gulp.task('default', function () {
 There's also a very handy export `electron.dest()` function that
 makes sure you always have the exact version of Electron in a directory:
 
-```javascript
-var gulp = require('gulp');
-var electron = require('gulp-awesome-electron');
+```bash
+$ npm i gulp run-sequence gulp-awesome-electron --save-dev
+```
 
-gulp.task('default', function () {
-	return electron.dest('electron-build', { version: '0.34.1', platform: 'darwin' });
+```javascript
+const gulp = require('gulp'),
+    runSequence = require('run-sequence'),
+    electron = require('gulp-awesome-electron');
+
+let download = (version, platform) => {
+    return electron
+        .dest('~/.electron-cache', {
+            version: version,
+            platform: platform
+       });
+};
+
+gulp.task('download-windows', () => {
+    return download('1.4.0', 'win32')
+});
+
+gulp.task('download-linux', () => {
+    return download('1.4.0', 'linux')
+});
+
+gulp.task('download-macos', () => {
+    return download('1.4.0', 'darwin')
+});
+
+gulp.task('default', (done) => {
+    return runSequence(['download-windows', 'download-linux', 'download-macos'], done);
 });
 ```
 
@@ -79,21 +125,20 @@ and replace it.
 
 You **must** provide the following options:
 - `version` - the [Electron version](https://github.com/atom/electron/releases) to use
-- `platform` - kind of OS (`darwin`, `linux`, `win32`)
+- `platform` - kind of OS (`darwin`, `linux` or `win32`)
 
 The following options are **optional**:
 - `quiet` - suppress a progress bar when downloading
 - `cache` - provide a custom folder path where electron binaries will be cached. (Defaults to `os.tempDir/gulp-awesome-electron-cache`)
-- `token` - GitHub access token(to avoid request limit. You can grab it [here](https://github.com/settings/tokens))
-
+- `token` - GitHub access token(to avoid **request limit**. You can grab it [here](https://github.com/settings/tokens))
 - `arch` - the processor architecture (`ia32`, `x64`)
 
-- **Windows**
+- **Windows only**
 	- `winIcon` - path to an `.ico` file
 	- `companyName` - company name
 	- `copyright` - copyright statement
 
-- **Darwin**
+- **MacOS (darwin) only**
 	- `darwinIcon` - path to an `.icns` file
 	- `darwinBundleDocumentTypes` - ([reference](https://developer.apple.com/library/ios/documentation/filemanagement/conceptual/documentinteraction_topicsforios/Articles/RegisteringtheFileTypesYourAppSupports.html)) array of dictionaries, each containing the following structure:
 	 - `name` - the `CFBundleTypeName` value
@@ -102,5 +147,5 @@ The following options are **optional**:
 	 - `extensions` - the `CFBundleTypeExtensions` value, a `string` array of file extensions
 	 - `iconFile` - the `CFBundleTypeIconFile` value
 
-- **Linux**
+- **Linux only**
 	- `linuxExecutableName` - overwrite the name of the executable in Linux
