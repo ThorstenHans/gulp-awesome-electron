@@ -1,6 +1,6 @@
 {
   "name": "gulp-awesome-electron",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Fork from João's gulp-atom-electron - allows to integrade icons for win32 when building on the mac",
   "main": "src/index.js",
   "scripts": {

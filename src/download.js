@@ -13,8 +13,8 @@ var zfs = require('gulp-vinyl-zip');
 var filter = require('gulp-filter');
 var assign = require('object-assign');
 
-function cache(cachPath, assetName, onMiss, cb) {
-	var assetPath = path.join(cachPath, assetName);
+function cache(cachePath, assetName, onMiss, cb) {
+	var assetPath = path.join(cachePath, assetName);
 
 	fs.exists(assetPath, function (exists) {
 		if (exists) { return cb(null, assetPath); }
