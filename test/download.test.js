@@ -12,7 +12,7 @@ describe('download', function () {
 	it('should work', function(cb) {
 		var didSeeInfoPList = false;
 
-		download({ version: '0.24.0', platform: 'darwin', token: process.env['GITHUB_TOKEN'] })
+		download({ version: '0.24.0', platform: 'darwin', token: process.env['GITHUB_TOKEN'], cache: './.electron-cache' })
 			.on('data', function (f) {
 				if (f.relative === path.join('Electron.app', 'Contents', 'Info.plist')) {
 					didSeeInfoPList = true;
@@ -29,13 +29,13 @@ describe('download', function () {
 		var ffmpegSeen = false;
 
 		var originalFile = null;
-		var original = download({ version: '0.37.5', platform: 'darwin', token: process.env['GITHUB_TOKEN'] })
+		var original = download({ version: '0.37.5', platform: 'darwin', token: process.env['GITHUB_TOKEN'], cache: './.electron-cache' })
 			.pipe(filter("**/libffmpeg.dylib"))
 			.pipe(buffer())
 			.pipe(es.through(function (f) { originalFile = f; }))
 			.on("end", function () {
 				var modifiedFile = null;
-				var modified = download({ version: '0.37.5', platform: 'darwin', token: process.env['GITHUB_TOKEN'], ffmpegChromium: true })
+				var modified = download({ version: '0.37.5', platform: 'darwin', token: process.env['GITHUB_TOKEN'],cache: './.electron-cache', ffmpegChromium: true })
 					.pipe(filter("**/libffmpeg.dylib"))
 					.pipe(buffer())
 					.pipe(es.through(function (f) { modifiedFile = f; }))

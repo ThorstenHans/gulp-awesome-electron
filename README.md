@@ -2,9 +2,9 @@
 
 **This is a fork from `gulp-atom-electron`**
 
-Use this if you want to include icons for windows executables also from a mac. Warning> Wine is still required!
+Use this if you want to include icons for windows executables also from a mac.
 
-[![Build Status](https://travis-ci.org/joaomoreno/gulp-atom-electron.svg?branch=master)](https://travis-ci.org/joaomoreno/gulp-atom-electron)
+**Warning>** Wine is still required!
 
 ### Installation
 
@@ -83,6 +83,7 @@ You **must** provide the following options:
 
 The following options are **optional**:
 - `quiet` - suppress a progress bar when downloading
+- `cache` - provide a custom folder path where electron binaries will be cached. (Defaults to `os.tempDir/gulp-awesome-electron-cache`)
 - `token` - GitHub access token(to avoid request limit. You can grab it [here](https://github.com/settings/tokens))
 
 - `arch` - the processor architecture (`ia32`, `x64`)

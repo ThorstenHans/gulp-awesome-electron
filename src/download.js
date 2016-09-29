@@ -13,11 +13,8 @@ var zfs = require('gulp-vinyl-zip');
 var filter = require('gulp-filter');
 var assign = require('object-assign');
 
-var cachePath = path.join(os.tmpdir(), 'gulp-electron-cache');
-mkdirp.sync(cachePath);
-
-function cache(assetName, onMiss, cb) {
-	var assetPath = path.join(cachePath, assetName);
+function cache(cachPath, assetName, onMiss, cb) {
+	var assetPath = path.join(cachPath, assetName);
 
 	fs.exists(assetPath, function (exists) {
 		if (exists) { return cb(null, assetPath); }
@@ -99,7 +96,7 @@ function download(opts, cb) {
 		});
 	}
 
-	cache(assetName, download, cb);
+	cache(opts.cache, assetName, download, cb);
 }
 
 function getDarwinLibFFMpegPath(opts) {
@@ -109,15 +106,19 @@ function getDarwinLibFFMpegPath(opts) {
 module.exports = function (opts) {
 	var electron = es.through();
 	var ffmpeg = es.through();
-	
+
 	var downloadOpts = {
 		version: opts.version,
 		platform: opts.platform,
 		arch: opts.arch,
 		assetName: semver.gte(opts.version, '0.24.0') ? 'electron' : 'atom-shell',
 		token: opts.token,
-		quiet: opts.quiet
+		quiet: opts.quiet,
+		cache: opts.cache || path.join(os.tmpdir(), 'gulp-awesome-electron-cache')
 	};
+
+
+	mkdirp.sync(downloadOpts.cache);
 
 	download(downloadOpts, function(err, vanilla) {
 		if (err) { return electron.emit('error', err); }

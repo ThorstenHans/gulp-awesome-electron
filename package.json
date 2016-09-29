@@ -1,6 +1,6 @@
 {
   "name": "gulp-awesome-electron",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Fork from João's gulp-atom-electron - allows to integrade icons for win32 when building on the mac",
   "main": "src/index.js",
   "scripts": {
@@ -19,33 +19,35 @@
     "github"
   ],
   "author": "João Moreno",
-  "contributors": ["Thorsten Hans"],
+  "contributors": [
+    "Thorsten Hans"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ThorstenHans/gulp-awesome-electron/issues"
   },
   "homepage": "https://github.com/ThorstenHans/gulp-awesome-electron",
   "dependencies": {
-    "event-stream": "^3.1.7",
-    "github-releases": "^0.2.0",
+    "event-stream": "^3.3.4",
+    "github-releases": "^0.3.2",
     "gulp-filter": "^4.0.0",
-    "gulp-rename": "^1.2.0",
-    "gulp-symdest": "^1.0.0",
-    "gulp-vinyl-zip": "^1.2.0",
-    "mkdirp": "^0.5.0",
-    "object-assign": "^4.0.1",
-    "plist": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-symdest": "^1.1.0",
+    "gulp-vinyl-zip": "^1.4.0",
+    "mkdirp": "^0.5.1",
+    "object-assign": "^4.1.0",
+    "plist": "^2.0.1",
     "progress": "^1.1.8",
-    "rcedit": "^0.3.0",
-    "rimraf": "^2.4.2",
-    "semver": "^4.3.4",
-    "temp": "^0.8.1",
-    "vinyl": "^0.5.1",
-    "vinyl-fs": "^0.3.13"
+    "rcedit": "^0.7.0",
+    "rimraf": "^2.5.4",
+    "semver": "^5.3.0",
+    "temp": "^0.8.3",
+    "vinyl": "^1.2.0",
+    "vinyl-fs": "^2.4.3"
   },
   "devDependencies": {
     "gulp-buffer": "0.0.2",
-    "gulp-vinyl-zip": "^1.2.2",
-    "mocha": "^2.0.1"
+    "gulp-vinyl-zip": "^1.4.0",
+    "mocha": "^3.1.0"
   }
 }
